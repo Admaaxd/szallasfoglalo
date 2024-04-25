@@ -39,12 +39,3 @@
   .home-container li:hover {
     background-color: #eaeaea;
   }
-
-  .recentlyJoinedSection {
-    margin-top: 90px;
-  }
-  
-  .recentlyJoinedUsers {
-    font-size: 20px;
-    font-weight: bold;
-  }

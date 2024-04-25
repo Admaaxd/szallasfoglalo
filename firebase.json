@@ -1,13 +1,15 @@
 {
-  "hosting": [
-    {
-      "target": "szallasfoglaloprojekt",
-      "source": ".",
-      "frameworksBackend": {
-        "region": "europe-west1"
-      }
+  "hosting": {
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "europe-west1"
     }
-  ],
+  },
   "functions": [
     {
       "source": "functions",

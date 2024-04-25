@@ -1,9 +1,8 @@
-import { Injectable, inject, signal } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { Auth, signInWithEmailAndPassword, signOut, user } from "@angular/fire/auth";
 import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth";
-import { Observable, from } from "rxjs";
+import { Observable, catchError, from, throwError } from "rxjs";
 import { UserInterface } from "../interfaces/user.interface";
-import { Firestore, addDoc, collection, doc, setDoc } from "@angular/fire/firestore";
 
 @Injectable({
     providedIn: 'root'
@@ -12,26 +11,23 @@ export class AuthService {
     user$ = user(this.firebaseAuth)
     currentUserSig = signal<UserInterface | null | undefined>(undefined)
 
-    private firestore: Firestore;
-
-    constructor(private firebaseAuth: Auth, firestore: Firestore) {
-        this.firestore = firestore;
-      }
+    constructor(private firebaseAuth: Auth) {}
       
     register(email: string, username: string, password: string): Observable<void> {
-        const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password)
-          .then(response => {
-            updateProfile(response.user, {displayName: username});
-            const userDocRef = doc(this.firestore, `users/${response.user.uid}`);
-            return setDoc(userDocRef, {
-              username: username,
-              email: email,
-              joinDate: new Date()
-            });
-          });
-    
-        return from(promise);
-      }
+      const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password)
+        .then(response => {
+          return updateProfile(response.user, { displayName: username });
+        })
+        .catch(error => {
+          throw error;
+        });
+  
+      return from(promise).pipe(
+        catchError(error => {
+          return throwError(() => new Error("Failed to register. Please try again."));
+        })
+      );
+    }
 
     login(email: string, password: string): Observable<void> {
         const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password).then(() => {});
