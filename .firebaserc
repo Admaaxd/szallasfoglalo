@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "szallasfoglaloprojekt-bae85": {
+      "hosting": {
+        "szallasfoglaloprojekt": [
+          "szallasfoglaloprojekt-bae85"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "szallasfoglaloprojekt-bae85"
+  }
+}

@@ -1,0 +1,28 @@
+<div class="accommodation-details-container">
+    <h2>{{ accommodation.name }}</h2>
+    <img [src]="accommodation.imageUrl" alt="{{ accommodation.name }}" class="accommodation-image">
+  
+    <form [formGroup]="reservationForm" (ngSubmit)="bookNow()">
+      <mat-form-field appearance="fill" class="date-picker-field">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="date-picker-field">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+  
+      <p class="location"><strong>Location:</strong> {{ accommodation.location }}</p>
+      <p class="price"><strong>Price:</strong> ${{ accommodation.price }} per night</p>
+      <p class="description">{{ accommodation.description }}</p>
+      <div class="button-container">
+        <button class="book-now-btn" mat-raised-button color="primary" type="submit" [disabled]="!reservationForm.valid">Book Now</button>
+        <button type="button" class="back-btn" mat-raised-button color="primary" routerLink="/accommodationList">Back to List</button>
+      </div>
+    </form>
+  </div>

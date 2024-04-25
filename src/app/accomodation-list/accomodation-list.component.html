@@ -1,0 +1,14 @@
+<main class="content accommodation-list">
+    <h2>Accommodations</h2>
+        <div class="accommodations-container">
+            <div class="accommodation-item" *ngFor="let accommodation of accommodations">
+              <img mat-card-image [src]="accommodation.imageUrl" alt="Accommodation {{accommodation.id}}" class="accommodation-image">
+                <div class="accommodation-info">
+                <h3 mat-line>{{ accommodation.name }}</h3>
+                <p mat-line class="location">{{ accommodation.location }}</p>
+                <p mat-line class="price">From ${{ accommodation.price }} per night</p>
+                <button class="book-btn" mat-button [routerLink]="['/accommodationDetail', accommodation.id]">Book Now</button>
+              </div>
+            </div>
+          </div>
+</main>

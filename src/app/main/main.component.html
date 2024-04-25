@@ -1,0 +1,13 @@
+<div class="home-container" [style.background-image]="'url(' + backgroundUrl + ')'">
+    <h1 class="mat-display-1">Welcome to Our Accommodation Booking Site!</h1>
+    <p class="mat-body-1" [innerHTML]="'Find and book your perfect stay at the best price.' | highlight:'perfect'"></p>
+    <button mat-raised-button color="primary" routerLink="/accommodationList" matRipple> Browse Accommodations </button>
+    <div class="recentlyJoinedSection">
+        <p class="recentlyJoinedUsers">Recently joined users</p>
+        <ul>
+            <li *ngFor="let user of recentlyJoinedUsers">
+                {{ user.username }} - Joined: {{ user.joinDate.toDate() | customDate }}
+            </li>
+        </ul>
+    </div>
+</div>

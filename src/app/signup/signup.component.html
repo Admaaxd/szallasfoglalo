@@ -1,0 +1,25 @@
+<main class="content">
+  <div class="signup-container">
+    <h2 class="form-header">Sign-up</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="signup-form">
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" formControlName="username" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+      </mat-form-field>
+      <div *ngIf="errorMessage" class="error-message">
+        {{errorMessage}}
+      </div>
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" class="signup-button">Sign-up</button>
+      </div>
+    </form>
+  </div>
+</main>

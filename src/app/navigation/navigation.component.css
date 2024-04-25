@@ -1,0 +1,51 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links a {
+    display: block;
+    padding: 20px 15px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .nav-links a.router-link-active,
+  .nav-links a:hover {
+    background-color: #0056b3;
+  }
+  
+  .navbar-brand {
+    padding: 20px 15px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: white;
+  }
+
+  .logout-link {
+    color: #000; /* Default color for log out link */
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .logout-link:hover {
+    color: #d9534f; /* Example: change to a different color on hover */
+    text-decoration: underline; /* Adds underline on hover, adjust as needed */
+  }

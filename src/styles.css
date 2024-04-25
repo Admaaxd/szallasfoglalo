@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.highlight {
+    background-color: yellowgreen;
+  }
+
+  .container {
+    padding: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      padding: 40px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+      margin: auto;
+    }
+  }
+  
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (min-width: 768px) {
+    .flex-container {
+      flex-direction: row;
+    }
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  body {
+    font-size: 16px;
+  }
+  
+  @media (min-width: 768px) {
+    body {
+      font-size: 18px;
+    }
+  }

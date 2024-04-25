@@ -1,0 +1,21 @@
+<main class="content myaccomodation-page">
+    <mat-card class="myaccomodation-container">
+      <mat-card-header>
+        <mat-card-title>My accommodations</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h3>Your Reservations:</h3>
+        <div *ngFor="let reservation of reservations; let i = index">
+          <p>{{reservation.name}} - ${{reservation.price}} per night</p>
+          <p>Location: {{reservation.location}}</p>
+          <p *ngIf="!reservation.editing">Date: {{reservation.startDate | date: 'mediumDate'}} - {{reservation.endDate | date: 'mediumDate'}}</p>
+          <div *ngIf="reservation.editing">
+            <input type="date" [(ngModel)]="reservation.startDate" />
+            <input type="date" [(ngModel)]="reservation.endDate" />
+          </div>
+          <button mat-button (click)="toggleEdit(reservation)">Edit</button>
+          <button mat-button color="warn" (click)="removeReservation(reservation.id)">Remove</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </main>

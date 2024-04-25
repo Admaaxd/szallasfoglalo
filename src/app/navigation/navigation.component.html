@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <a routerLink="/home" class="navbar-brand">AccommodationBook</a>
+    <div class="nav-links">
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a routerLink="/accommodationList" routerLinkActive="active">Accommodations</a>
+      @if (authService.currentUserSig()) {
+        <a routerLink="/myaccomodations"  routerLinkActive="active">My accomodations</a>
+      }
+      <a routerLink="/about" routerLinkActive="active">About</a>
+      @if (authService.currentUserSig()) {
+      <a (click)="logout()" class="logout-link">Log out</a>
+      }
+      @if (authService.currentUserSig() == null) {
+        <a routerLink="/login"  routerLinkActive="active">Login</a>
+      }
+    </div>
+  </nav>
