@@ -48,3 +48,24 @@
     justify-content: center;
     display: flex;
   }
+
+
+@media (max-width: 992px) {
+  .accommodation-details-container {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .accommodation-image {
+    max-height: 300px;
+  }
+
+  .location, .price, .description {
+    font-size: 0.9rem;
+  }
+
+  .book-now-btn, .back-btn {
+    padding: 8px 16px;
+  }
+}

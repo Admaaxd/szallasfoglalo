@@ -11,7 +11,7 @@
     padding: 0 20px;
     box-sizing: border-box;
   }
-  
+
   .nav-links {
     display: flex;
     list-style: none;
@@ -40,12 +40,40 @@
   }
 
   .logout-link {
-    color: #000; /* Default color for log out link */
+    color: #000;
     cursor: pointer;
     text-decoration: none;
   }
   
   .logout-link:hover {
-    color: #d9534f; /* Example: change to a different color on hover */
-    text-decoration: underline; /* Adds underline on hover, adjust as needed */
+    color: #d9534f;
+    text-decoration: underline;
+  }
+
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: row;
+      justify-content: start;
+      padding: 5px 10px;
+      overflow-x: auto;
+    }
+  
+    .nav-links {
+      flex-direction: row;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      white-space: nowrap;
+    }
+  
+    .nav-links a {
+      padding: 5px 10px;
+      font-size: 0.8rem;
+    }
+  
+    .navbar-brand {
+      font-size: 1rem;
+      padding: 5px 10px;
+    }
   }

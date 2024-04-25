@@ -66,3 +66,26 @@
   .book-btn:hover {
     background-color: #0056b3;
   }
+
+
+@media (max-width: 992px) {
+  .accommodation-item {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .accommodations-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .accommodation-item {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+  
+  .accommodation-image {
+    height: auto;
+  }
+}
