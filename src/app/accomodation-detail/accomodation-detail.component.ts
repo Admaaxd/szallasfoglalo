@@ -15,9 +15,10 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ReservationService } from '../services/reservation.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Auth } from '@angular/fire/auth';
 import { Accommodation } from '../interfaces/accomodation.interface';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-accomodation-detail',
@@ -25,7 +26,7 @@ import { Accommodation } from '../interfaces/accomodation.interface';
   imports: [AccomodationListComponent, AccomodationDetailComponent, RouterLink,
     MatButtonModule, MatCardModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule, MatFormFieldModule,
     MatInputModule, MatSelectModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, FormsModule, 
-    ReactiveFormsModule, MatSnackBarModule],
+    ReactiveFormsModule, MatSnackBarModule, NgIf],
   templateUrl: './accomodation-detail.component.html',
   styleUrl: './accomodation-detail.component.css'
 })
@@ -33,7 +34,7 @@ export class AccomodationDetailComponent implements OnInit {
   reservationForm = new FormGroup({
     startDate: new FormControl('', Validators.required),
     endDate: new FormControl('', Validators.required),
-  });
+  }, { validators: this.dateRangeValidator() });
 
   accommodations: Accommodation[] = [
     {
@@ -134,5 +135,13 @@ export class AccomodationDetailComponent implements OnInit {
         duration: 5000,
       });
     }
+  }
+
+  private dateRangeValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const startDate = control.get('startDate')?.value;
+      const endDate = control.get('endDate')?.value;
+      return startDate && endDate && new Date(startDate) > new Date(endDate) ? { 'dateRangeError': true } : null;
+    };
   }
 }

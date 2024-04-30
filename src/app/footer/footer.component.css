@@ -24,3 +24,20 @@
     padding: 0;
     margin: 0 5px;
   }
+
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 1rem 0.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .site-footer {
+      padding: 1rem 0.25rem;
+    }
+  
+    .footer-content, .footer-links {
+      padding: 0.25rem;
+      text-align: center;
+    }
+  }

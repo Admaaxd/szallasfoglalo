@@ -9,8 +9,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ReservationService } from '../services/reservation.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,8 +25,9 @@ import { FormsModule } from '@angular/forms';
 export class MyaccomodationsComponent implements OnInit{
   reservations: any[] = [];
   editingReservation: number | null = null;
+  tempDates: { [key: number]: { startDate: Date, endDate: Date } } = {};
 
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.reservationService.getReservations().subscribe(reservations => {
@@ -36,19 +36,44 @@ export class MyaccomodationsComponent implements OnInit{
   }
 
   removeReservation(id: number): void {
-    this.reservationService.removeReservation(id);
+    if (window.confirm("Are you sure you want to delete this reservation?")) {
+      this.reservationService.removeReservation(id);
+      this.reservations = this.reservations.filter(reservation => reservation.id !== id);
+      this.snackBar.open('Reservation removed successfully.', 'OK', { duration: 3000 });
+    }
+  }
+
+  validateDates(startDate: Date, endDate: Date): boolean {
+    if (new Date(startDate) > new Date(endDate)) {
+      this.snackBar.open('Start date must be earlier than end date.', 'OK', { duration: 3000 });
+      return false;
+    }
+    return true;
   }
 
   updateReservationDates(id: number): void {
-    const reservation = this.reservations.find(res => res.id === id);
-    if (reservation) {
-      this.reservationService.updateReservation(id, reservation.startDate, reservation.endDate);
-      this.editingReservation = null;
-      reservation.editing = false;
+    const dates = this.tempDates[id];
+    if (this.validateDates(dates.startDate, dates.endDate)) {
+      const index = this.reservations.findIndex(res => res.id === id);
+      if (index !== -1) {
+        this.reservations[index].startDate = dates.startDate;
+        this.reservations[index].endDate = dates.endDate;
+        this.reservationService.updateReservation(id, dates.startDate, dates.endDate);
+        this.reservations = [...this.reservations];
+        this.reservations[index].editing = false;
+        this.editingReservation = null;
+      }
     }
   }
 
   toggleEdit(reservation: any): void {
+    if (!reservation.editing) {
+      this.tempDates[reservation.id] = {
+        startDate: new Date(reservation.startDate),
+        endDate: new Date(reservation.endDate)
+      };
+    }
     reservation.editing = !reservation.editing;
+    this.editingReservation = reservation.editing ? reservation.id : null;
   }
 }

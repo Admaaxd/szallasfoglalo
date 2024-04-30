@@ -19,6 +19,4 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
-export class FooterComponent {
-
-}
+export class FooterComponent {}

@@ -54,5 +54,4 @@ export class MainComponent implements OnInit{
         })
         .catch((error) => console.error('Failed to load background image:', error));
     }
-  
 }

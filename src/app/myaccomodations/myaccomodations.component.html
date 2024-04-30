@@ -11,8 +11,9 @@
           <p>Location: {{reservation.location}}</p>
           <p *ngIf="!reservation.editing">Date: {{reservation.startDate | date: 'mediumDate'}} - {{reservation.endDate | date: 'mediumDate'}}</p>
           <div *ngIf="reservation.editing">
-            <input type="date" [(ngModel)]="reservation.startDate" />
-            <input type="date" [(ngModel)]="reservation.endDate" />
+            <input type="date" [(ngModel)]="tempDates[reservation.id].startDate" name="startDate{{i}}"/>
+            <input type="date" [(ngModel)]="tempDates[reservation.id].endDate" name="endDate{{i}}"/>
+            <button mat-button color="primary" (click)="updateReservationDates(reservation.id)">Save</button>
           </div>
           <button mat-button (click)="toggleEdit(reservation)">Edit</button>
           <button mat-button color="warn" (click)="removeReservation(reservation.id)">Remove</button>

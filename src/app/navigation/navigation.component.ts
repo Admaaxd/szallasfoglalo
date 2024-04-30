@@ -42,5 +42,4 @@ export class NavigationComponent implements OnInit, OnDestroy{
       this.userSubscription.unsubscribe();
     }
   }
-
 }
